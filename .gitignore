@@ -1,0 +1,11 @@
+# 构建生成目录（CMake/MSBuild 产物）
+build/
+
+# 发布包（由 windeployqt 生成，体积大，按需重新打包）
+dist/
+
+# 运行期生成的 SQLite 数据库（删掉即可重置数据）
+server/data/mock.db
+
+# Qt Creator 用户级配置
+*.user

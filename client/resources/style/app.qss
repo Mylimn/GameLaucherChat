@@ -1,0 +1,494 @@
+/* 深色现代风格皮肤 —— 唯一皮肤来源（见 docs/TECH_DESIGN.md §7）。
+   颜色一律以 @token 占位，由 client/src/ui/Theme.h 在加载时替换为其色板常量。
+   禁止在本文件写死颜色值，也不要新增 Theme 中不存在的 token。 */
+
+QWidget {
+    background-color: @bgBase;
+    color: @textPrimary;
+    font-family: "Segoe UI", "Microsoft YaHei UI";
+    font-size: 13px;
+}
+
+QMainWindow, QDialog {
+    background-color: @bgBase;
+}
+
+/* 标签默认不画底，避免在非 bgBase 的容器（侧栏/卡片）上留下色块 */
+QLabel {
+    background: transparent;
+}
+
+/* ---------- 文本层级 ---------- */
+
+#titleLabel {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#subtitleLabel {
+    color: @textSecondary;
+}
+
+#hintLabel {
+    color: @textSecondary;
+    font-size: 15px;
+}
+
+#userName {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#userAccount {
+    color: @textSecondary;
+}
+
+/* M3：好友/会话面板的文本层级与列表项 */
+#panelTitle {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#itemTitle {
+    font-size: 13px;
+}
+
+#itemTitle[unread="true"] {
+    font-weight: 600;
+}
+
+#itemSubtitle {
+    color: @textSecondary;
+    font-size: 11px;
+}
+
+#itemSubtitle[state="online"] {
+    color: @online;
+}
+
+#itemSubtitle[state="offline"] {
+    color: @textSecondary;
+}
+
+#emptyState {
+    color: @textSecondary;
+}
+
+/* 分段标题（最近会话 / 好友） */
+#sectionTitle {
+    color: @textSecondary;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding-left: 2px;
+}
+
+/* 未读圆点（主色） */
+#unreadBadge {
+    background-color: @accent;
+    color: @textOnAccent;
+    border-radius: 8px;
+    min-width: 16px;
+    max-height: 16px;
+    font-size: 11px;
+    padding: 0 4px;
+}
+
+/* 在线状态点：8px 圆形，颜色随 state 变化 */
+#presenceDot {
+    min-width: 8px;
+    max-width: 8px;
+    min-height: 8px;
+    max-height: 8px;
+    border-radius: 4px;
+    background-color: @offline;
+}
+
+#presenceDot[state="online"] {
+    background-color: @online;
+}
+
+/* 列表项自定义行的容器必须透明，否则会盖住 QListWidget::item 的 hover/选中底色 */
+#listItem {
+    background: transparent;
+}
+
+#messageLabel {
+    color: @textSecondary;
+    min-height: 20px;
+}
+
+#messageLabel[tone="error"] {
+    color: @danger;
+}
+
+#messageLabel[tone="success"] {
+    color: @online;
+}
+
+/* ---------- 连接状态（小圆点 + 文案） ---------- */
+
+#statusLabel {
+    color: @textSecondary;
+}
+
+#statusLabel[state="online"] {
+    color: @online;
+}
+
+#statusLabel[state="connecting"] {
+    color: @warning;
+}
+
+#statusLabel[state="offline"] {
+    color: @offline;
+}
+
+/* ---------- 侧栏 ---------- */
+
+#sidebar {
+    background-color: @bgPanel;
+    border-right: 1px solid @border;
+}
+
+/* ---------- 输入框 ---------- */
+
+QLineEdit {
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 8px;
+    background-color: @bgCard;
+    border: 1px solid @border;
+    color: @textPrimary;
+    selection-background-color: @accent;
+}
+
+QLineEdit:focus {
+    border: 1px solid @accent;
+}
+
+QLineEdit:disabled {
+    color: @textSecondary;
+}
+
+/* ---------- 按钮 ---------- */
+
+QPushButton {
+    min-height: 32px;
+    padding: 0 16px;
+    border-radius: 8px;
+    background-color: @bgCard;
+    border: 1px solid @border;
+    color: @textPrimary;
+}
+
+QPushButton:hover {
+    background-color: @bgHover;
+    border: 1px solid @accent;
+}
+
+QPushButton:pressed {
+    background-color: @bgSelected;
+}
+
+QPushButton:disabled {
+    color: @textSecondary;
+}
+
+/* 主按钮：实心主色 + 高对比文字 */
+QPushButton#primaryButton {
+    background-color: @accent;
+    border: 1px solid @accent;
+    color: @textOnAccent;
+    font-weight: 600;
+}
+
+QPushButton#primaryButton:hover {
+    background-color: @accentHover;
+    border: 1px solid @accentHover;
+}
+
+QPushButton#primaryButton:pressed {
+    background-color: @accentPressed;
+    border: 1px solid @accentPressed;
+}
+
+/* QSS 无法设透明度，禁用态改用低饱和底 + 次文本色近似「变暗」 */
+QPushButton#primaryButton:disabled {
+    background-color: @bgSelected;
+    border: 1px solid @bgSelected;
+    color: @textSecondary;
+}
+
+/* ---------- 页签 ---------- */
+
+QTabWidget::pane {
+    border: none;
+    background: transparent;
+}
+
+QTabBar::tab {
+    background: transparent;
+    color: @textSecondary;
+    padding: 8px 16px;
+    border: none;
+    border-bottom: 2px solid transparent;
+}
+
+QTabBar::tab:hover {
+    color: @textPrimary;
+}
+
+QTabBar::tab:selected {
+    color: @textPrimary;
+    border-bottom: 2px solid @accent;
+}
+
+/* ---------- 好友 / 请求列表（44px 行高 + hover/选中） ---------- */
+
+QListWidget#friendList,
+QListWidget#requestList,
+QListWidget#conversationList {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+QListWidget#friendList::item,
+QListWidget#requestList::item,
+QListWidget#conversationList::item {
+    border: none;
+    border-left: 3px solid transparent;
+    border-radius: 8px;
+}
+
+QListWidget#friendList::item:hover,
+QListWidget#requestList::item:hover,
+QListWidget#conversationList::item:hover {
+    background-color: @bgHover;
+}
+
+QListWidget#friendList::item:selected,
+QListWidget#requestList::item:selected,
+QListWidget#conversationList::item:selected {
+    background-color: @bgSelected;
+    border-left: 3px solid @accent;
+}
+
+/* ---------- 消息列表（气泡由 delegate 绘制，这里只清底） ---------- */
+
+QListView#messageList {
+    background: transparent;
+    border: none;
+}
+
+/* ---------- 小尺寸按钮（列表内操作） ---------- */
+
+QPushButton#miniButton {
+    min-height: 24px;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    background-color: @bgCard;
+    border: 1px solid @border;
+    color: @textPrimary;
+}
+
+QPushButton#miniButton:hover {
+    background-color: @bgHover;
+    border: 1px solid @accent;
+}
+
+QPushButton#miniButtonAccent {
+    min-height: 24px;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    background-color: @accent;
+    border: 1px solid @accent;
+    color: @textOnAccent;
+    font-weight: 600;
+}
+
+QPushButton#miniButtonAccent:hover {
+    background-color: @accentHover;
+    border: 1px solid @accentHover;
+}
+
+/* ---------- 游戏库（M4：64px 卡片行） ---------- */
+
+QListWidget#gameList {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+QListWidget#gameList::item {
+    border: none;
+    border-radius: 10px;
+}
+
+QListWidget#gameList::item:hover {
+    background-color: @bgHover;
+}
+
+#gameCover {
+    border-radius: 8px;
+}
+
+/* 无封面时的首字母占位 */
+#coverPlaceholder {
+    background-color: @bgSelected;
+    color: @textSecondary;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#gameStatus {
+    color: @textSecondary;
+    font-size: 12px;
+}
+
+#gameStatus[state="running"] {
+    color: @online;
+}
+
+#gameStatus[state="starting"] {
+    color: @warning;
+}
+
+#gameStatus[state="error"] {
+    color: @danger;
+}
+
+/* ---------- 滚动条 ---------- */
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 8px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: @bgHover;
+    border-radius: 4px;
+    min-height: 24px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: @bgSelected;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: transparent;
+}
+
+/* 横向滚动条：不显式声明时会退回系统浅色样式，底部出现白条 */
+QScrollBar:horizontal {
+    background: transparent;
+    height: 8px;
+    margin: 0;
+}
+
+QScrollBar::handle:horizontal {
+    background: @bgHover;
+    border-radius: 4px;
+    min-width: 24px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: @bgSelected;
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    width: 0;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: transparent;
+}
+
+/* 横竖滚动条交汇的小方块同样由系统绘制，显式设为底色 */
+QAbstractScrollArea::corner {
+    background: @bgBase;
+}
+
+/* 页签栏底衬：默认由样式绘制浅色基线 */
+QTabBar {
+    background: transparent;
+}
+
+/* ---------- 非原生文件对话框 ---------- */
+/* 由 ui/WindowChrome 强制 DontUseNativeDialog 后，这些控件才会出现在我们的进程里，
+   需要逐项换肤，否则文件列表、下拉框仍是系统浅色（NFR-10） */
+
+QFileDialog {
+    background-color: @bgBase;
+}
+
+QFileDialog QListView, QFileDialog QTreeView {
+    background-color: @bgPanel;
+    border: 1px solid @border;
+    border-radius: 8px;
+    color: @textPrimary;
+    outline: none;
+}
+
+QFileDialog QListView::item:hover, QFileDialog QTreeView::item:hover {
+    background-color: @bgHover;
+}
+
+QFileDialog QListView::item:selected, QFileDialog QTreeView::item:selected {
+    background-color: @bgSelected;
+    color: @textPrimary;
+}
+
+QFileDialog QHeaderView::section {
+    background-color: @bgCard;
+    color: @textSecondary;
+    border: none;
+    border-bottom: 1px solid @border;
+    padding: 4px 8px;
+}
+
+QFileDialog QComboBox {
+    min-height: 28px;
+    padding: 0 8px;
+    border: 1px solid @border;
+    border-radius: 6px;
+    background-color: @bgCard;
+    color: @textPrimary;
+}
+
+QFileDialog QComboBox::drop-down {
+    border: none;
+    width: 20px;
+}
+
+QFileDialog QComboBox QAbstractItemView {
+    background-color: @bgPanel;
+    border: 1px solid @border;
+    color: @textPrimary;
+    selection-background-color: @bgSelected;
+}
+
+QFileDialog QToolButton {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+QFileDialog QToolButton:hover {
+    background-color: @bgHover;
+    border: 1px solid @border;
+}
+
+QFileDialog QSplitter::handle {
+    background-color: @border;
+}

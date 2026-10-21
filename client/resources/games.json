@@ -1,0 +1,10 @@
+[
+  {
+    "id": "builtin-notepad",
+    "name": "记事本（示例）",
+    "exePath": "C:\\Windows\\System32\\notepad.exe",
+    "args": [],
+    "cover": "",
+    "addedAt": 0
+  }
+]

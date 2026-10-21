@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>style/app.qss</file>
+        <file>games.json</file>
+    </qresource>
+</RCC>
